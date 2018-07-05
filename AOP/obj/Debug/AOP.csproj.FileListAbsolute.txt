@@ -1,0 +1,12 @@
+A:\WebApplication1\AOP\bin\Debug\AOP.dll
+A:\WebApplication1\AOP\bin\Debug\AOP.pdb
+A:\WebApplication1\AOP\bin\Debug\MrAdvice.dll
+A:\WebApplication1\AOP\bin\Debug\MrAdvice.xml
+A:\WebApplication1\AOP\obj\Debug\AOP.csproj.CoreCompileInputs.cache
+A:\WebApplication1\AOP\obj\Debug\AOP.dll
+A:\WebApplication1\AOP\obj\Debug\AOP.pdb
+A:\WebApplication1\AOP\bin\Debug\Newtonsoft.Json.dll
+A:\WebApplication1\AOP\bin\Debug\Newtonsoft.Json.xml
+A:\WebApplication1\AOP\obj\Debug\AOP.csprojResolveAssemblyReference.cache
+A:\WebApplication1\AOP\bin\Debug\Utils.dll
+A:\WebApplication1\AOP\bin\Debug\Utils.pdb

@@ -1,0 +1,2473 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MrAdvice</name>
+    </assembly>
+    <members>
+        <member name="T:ArxOne.MrAdvice.Properties.Product">
+            <summary>
+            Informations about product
+            </summary>
+        </member>
+        <member name="F:ArxOne.MrAdvice.Properties.Product.Version">
+            <summary>
+            The version
+            </summary>
+        </member>
+        <member name="T:ArxOne.MrAdvice.PlatformUtility">
+            <summary>
+            Utility for platform
+            </summary>
+        </member>
+        <member name="M:ArxOne.MrAdvice.PlatformUtility.GetMembersReader(System.Type)">
+            <summary>
+            Gets the members reader, which allows to read members (fields, properties, methods) from type
+            </summary>
+            <param name="type">The type.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.PlatformUtility.GetAssignmentReader(System.Type)">
+            <summary>
+            Gets the assignment reader (to see if type can be assigned).
+            </summary>
+            <param name="type">The type.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.PlatformUtility.GetInformationReader(System.Type)">
+            <summary>
+            Gets the information reader (allows to query base, assembly).
+            </summary>
+            <param name="type">The type.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.PlatformUtility.GetAttributes``1(System.Reflection.Assembly)">
+            <summary>
+            Gets the advices at assembly level.
+            </summary>
+            <param name="provider">The provider.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.PlatformUtility.GetAttributes``1(System.Reflection.TypeInfo)">
+            <summary>
+            Gets the advices at type level.
+            </summary>
+            <param name="provider">The provider.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.PlatformUtility.GetAttributes``1(System.Type)">
+            <summary>
+            Gets the advices at type level.
+            </summary>
+            <param name="provider">The provider.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.PlatformUtility.GetAttributes``1(System.Reflection.MethodBase)">
+            <summary>
+            Gets the advices at method level.
+            </summary>
+            <param name="provider">The provider.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.PlatformUtility.GetAttributes``1(System.Reflection.FieldInfo)">
+            <summary>
+            Gets the advices at method level.
+            </summary>
+            <param name="provider">The provider.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.PlatformUtility.GetAttributes``1(System.Reflection.PropertyInfo)">
+            <summary>
+            Gets the advices at property level.
+            </summary>
+            <param name="provider">The provider.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.PlatformUtility.GetAttributes``1(System.Reflection.EventInfo)">
+            <summary>
+            Gets the advices at event level.
+            </summary>
+            <param name="provider">The provider.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.PlatformUtility.GetAttributes``1(System.Reflection.ParameterInfo)">
+            <summary>
+            Gets the advices at parameter level.
+            </summary>
+            <param name="provider">The provider.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.PlatformUtility.CreateDelegate``1(System.Reflection.MethodInfo)">
+            <summary>
+            Creates a delegate from a given method.
+            </summary>
+            <typeparam name="TDelegate">The type of the delegate.</typeparam>
+            <param name="methodInfo">The method information.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.PlatformUtility.GetAssembly(System.Type)">
+            <summary>
+            Gets the assembly.
+            </summary>
+            <param name="type">The type.</param>
+            <returns></returns>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Advices">
+            <summary>
+            Advices helper. The reflection for advices
+            </summary>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advices.Get(System.Reflection.MethodBase)">
+            <summary>
+            Gets the advices applied to given method.
+            </summary>
+            <param name="methodBase">The method base.</param>
+            <returns>Either:
+            - a list of Advices applied to method,
+            - an empty array from within a weaved method body (because the tools to tell are not here yet),
+            - null if method is not advised</returns>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Advice.AdviceContext">
+            <summary>
+            Advice context base class
+            </summary>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.AdviceContext.AdviceValues">
+            <summary>
+            Advice values are shared between advices.
+            They are:
+            - parameters
+            - return value
+            </summary>
+            <value>
+            The advice values.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.AdviceContext.Target">
+            <summary>
+            Gets or sets the target (the instance to which the advice applies).
+            null for static methods
+            </summary>
+            <value>
+            The target.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.AdviceContext.TargetType">
+            <summary>
+            Gets the type of the target.
+            </summary>
+            <value>
+            The type of the target.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.AdviceContext.TargetName">
+            <summary>
+            Gets the name of the target.
+            </summary>
+            <value>
+            The name of the target.
+            </value>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.AdviceContext.#ctor(ArxOne.MrAdvice.Advice.AdviceValues,ArxOne.MrAdvice.Advice.AdviceContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ArxOne.MrAdvice.Advice.AdviceContext" /> class.
+            </summary>
+            <param name="adviceValues">The advice values.</param>
+            <param name="nextAdviceContext">The next advice context.</param>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.AdviceContext.InvokeNext">
+            <summary>
+            Invokes the next advice.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.AdviceContext.Invoke">
+            <summary>
+            Invokes the current aspect (related to this instance).
+            </summary>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Advice.AdviceExtensions">
+            <summary>
+            Extensions to IAdvice (one extension, actually)
+            </summary>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.AdviceExtensions.Handle``1(ArxOne.MrAdvice.Advice.IAdvice)">
+            <summary>
+            Creates a proxy around the given interface, and injects the given advice at all levels.
+            </summary>
+            <typeparam name="TInterface">The type of the interface.</typeparam>
+            <param name="advice">The advice.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.AdviceExtensions.Handle(ArxOne.MrAdvice.Advice.IAdvice,System.Type)">
+            <summary>
+            Creates a proxy around the given interface, and injects the given advice at all levels.
+            </summary>
+            <param name="advice">The advice.</param>
+            <param name="interfaceType">Type of the interface.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.AdviceExtensions.GetImplementationType(System.Type)">
+            <summary>
+            Gets the type of the implementation.
+            </summary>
+            <param name="interfaceType">Type of the interface.</param>
+            <returns></returns>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Advice.AdviceInfoContext">
+            <summary>
+            Base class for advice information context
+            </summary>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.AdviceInfoContext.Target">
+            <summary>
+            Gets the target.
+            </summary>
+            <value>
+            The target.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.AdviceInfoContext.TargetType">
+            <summary>
+            Gets the type of the target.
+            </summary>
+            <value>
+            The type of the target.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.AdviceInfoContext.TargetName">
+            <summary>
+            Gets the name of the target.
+            </summary>
+            <value>
+            The name of the target.
+            </value>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Advice.AdviceValues">
+            <summary>
+            Parameters shared through all advices sharing a pointcut
+            They are target object, parameters (in/ref/out) and return value
+            </summary>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.AdviceValues.Target">
+            <summary>
+            Gets or sets the target (to which advices are applied).
+            </summary>
+            <value>
+            The target object.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.AdviceValues.TargetType">
+            <summary>
+            Gets or sets the type of the target.
+            </summary>
+            <value>
+            The type of the target.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.AdviceValues.Arguments">
+            <summary>
+            Gets the arguments (directly used by invoke).
+            In/ref/out arguments are stored here.
+            </summary>
+            <value>
+            The parameters.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.AdviceValues.ReturnValue">
+            <summary>
+            Gets or sets the return value.
+            </summary>
+            <value>
+            The return value.
+            </value>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.AdviceValues.#ctor(System.Object,System.Type,System.Object[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:ArxOne.MrAdvice.Advice.AdviceValues" /> class.
+            </summary>
+            <param name="target">The target.</param>
+            <param name="targetType">Type of the target.</param>
+            <param name="arguments">The arguments.</param>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Advice.AdvisedInterface">
+            <summary>
+            Base class for interface auto implementations
+            </summary>
+        </member>
+        <member name="F:ArxOne.MrAdvice.Advice.AdvisedInterface.Advice">
+            <summary>
+            The injected advice
+            </summary>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Advice.IAdvice">
+            <summary>
+            Represents an advice; this is the base marker for all advices
+            You don't have to explicitly implement this interface, since all other interfaces inherit it
+            </summary>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Advice.IAdviceContextTarget">
+            <summary>
+            Target part with advice context
+            Used by introduced fields
+            </summary>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.IAdviceContextTarget.Target">
+            <summary>
+            Gets the target.
+            </summary>
+            <value>
+            The target.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.IAdviceContextTarget.TargetType">
+            <summary>
+            Gets the type of the target.
+            </summary>
+            <value>
+            The type of the target.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.IAdviceContextTarget.TargetName">
+            <summary>
+            Gets the name of the target.
+            </summary>
+            <value>
+            The name of the target.
+            </value>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Advice.IInfoAdvice">
+            <summary>
+            Base class for Info Advices
+            Info Advices are called once per distinct reflection object at assembly load
+            </summary>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Advice.IMethodAdvice">
+            <summary>
+            Advices implementing this interface work on methods.
+            Can be used at assembly, type, method or property scope
+            </summary>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.IMethodAdvice.Advise(ArxOne.MrAdvice.Advice.MethodAdviceContext)">
+            <summary>
+            Implements advice logic.
+            Usually, advice must invoke context.Proceed()
+            </summary>
+            <param name="context">The method advice context.</param>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Advice.IMethodAsyncAdvice">
+            <summary>
+            Advices implementing this interface work on async methods.
+            Can be used at assembly, type, method or property scope
+            </summary>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.IMethodAsyncAdvice.Advise(ArxOne.MrAdvice.Advice.MethodAsyncAdviceContext)">
+            <summary>
+            Implements advice logic.
+            Usually, advice must invoke context.Proceed()
+            </summary>
+            <param name="context">The method advice context.</param>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Advice.IMethodInfoAdvice">
+            <summary>
+            Advices for <see cref="T:System.Reflection.MethodInfo"/>
+            </summary>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.IMethodInfoAdvice.Advise(ArxOne.MrAdvice.Advice.MethodInfoAdviceContext)">
+            <summary>
+            Invoked once per method, when assembly is loaded
+            </summary>
+            <param name="context">The method info advice context</param>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Advice.IMethodWeavingAdvice">
+            <summary>
+            Advice when weaving method
+            </summary>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.IMethodWeavingAdvice.Advise(ArxOne.MrAdvice.Advice.MethodWeavingContext)">
+            <summary>
+            Advises the specified context.
+            </summary>
+            <param name="context">The context.</param>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Advice.InnerMethodContext">
+            <summary>
+            Special terminal advice, which calls the final method
+            </summary>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.InnerMethodContext.TargetName">
+            <summary>
+            Gets the name of the target.
+            </summary>
+            <value>
+            The name of the target.
+            </value>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.InnerMethodContext.Invoke">
+            <summary>
+            Invokes the current aspect (related to this instance).
+            Here, the inner method is called
+            </summary>
+            <exception cref="T:System.InvalidOperationException">context.Proceed() must not be called on advised interfaces (think about it, it does not make sense).</exception>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Advice.IParameterAdvice">
+            <summary>
+            Advices implementing this interface work on parameters.
+            Can be used at assembly, type, method, property or parameter scope
+            </summary>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.IParameterAdvice.Advise(ArxOne.MrAdvice.Advice.ParameterAdviceContext)">
+            <summary>
+            Implements advice logic.
+            Usually, advice must invoke context.Proceed()
+            </summary>
+            <param name="context">The parameter advice context.</param>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Advice.IEventAdvice">
+            <summary>
+            Advices implementing this interface can intercept access to properties,
+            in a more precise way than IMethodAdvice would.
+            </summary>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.IEventAdvice.Advise(ArxOne.MrAdvice.Advice.EventAdviceContext)">
+            <summary>
+            Implements advice logic.
+            Usually, advice must invoke context.Proceed()
+            </summary>
+            <param name="context">The event advice context.</param>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Advice.IPropertyAdvice">
+            <summary>
+            Advices implementing this interface can intercept access to properties,
+            in a more precise way than IMethodAdvice would.
+            </summary>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.IPropertyAdvice.Advise(ArxOne.MrAdvice.Advice.PropertyAdviceContext)">
+            <summary>
+            Implements advice logic.
+            Usually, advice must invoke context.Proceed()
+            </summary>
+            <param name="context">The method advice context.</param>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Advice.IPropertyInfoAdvice">
+            <summary>
+            Advices for <see cref="T:System.Reflection.PropertyInfo"/>
+            </summary>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.IPropertyInfoAdvice.Advise(ArxOne.MrAdvice.Advice.PropertyInfoAdviceContext)">
+            <summary>
+            Invoked once per property, when assembly is loaded
+            </summary>
+            <param name="context">The property info advice context</param>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Advice.IWeavingAdvice">
+            <summary>
+            Advice to weaver
+            </summary>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Advice.MethodAdviceContext">
+            <summary>
+            Method advice context, passed to method advisors
+            </summary>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.MethodAdviceContext.Parameters">
+            <summary>
+            Gets the parameters.
+            Each parameter can be individually changed before Call.Proceed()
+            </summary>
+            <value>
+            The parameters.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.MethodAdviceContext.Arguments">
+            <summary>
+            Gets the argument.
+            Each argument can be individually changed before Call.Proceed()
+            </summary>
+            <value>
+            The arguments.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.MethodAdviceContext.HasReturnValue">
+            <summary>
+            Gets a value indicating whether the advised method has a return value.
+            </summary>
+            <value>
+            <c>true</c> if this instance has return value; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.MethodAdviceContext.ReturnValue">
+            <summary>
+            Gets or sets the return value (after Call.Proceed()).
+            </summary>
+            <value>
+            The return value.
+            </value>
+            <exception cref="T:System.InvalidOperationException" accessor="get">Method has no ReturnValue</exception>
+            <exception cref="T:System.InvalidOperationException" accessor="set">Method has no ReturnValue</exception>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.MethodAdviceContext.TargetMethod">
+            <summary>
+            Gets the target method.
+            </summary>
+            <value>
+            The target method.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.MethodAdviceContext.TargetName">
+            <summary>
+            Gets the name of the target.
+            </summary>
+            <value>
+            The name of the target.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.MethodAdviceContext.IsTargetMethodAsync">
+            <summary>
+            Gets a value indicating whether the target method is asynchronous.
+            </summary>
+            <value>
+            <c>true</c> if the target method is asynchronous; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.MethodAdviceContext.#ctor(ArxOne.MrAdvice.Advice.IMethodAdvice,System.Reflection.MethodBase,ArxOne.MrAdvice.Advice.AdviceValues,ArxOne.MrAdvice.Advice.AdviceContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ArxOne.MrAdvice.Advice.MethodAdviceContext" /> class.
+            </summary>
+            <param name="methodAdvice">The method advice.</param>
+            <param name="targetMethod">The target method.</param>
+            <param name="adviceValues">The call values.</param>
+            <param name="nextAdviceContext">The next advice context.</param>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.MethodAdviceContext.#ctor(ArxOne.MrAdvice.Advice.IMethodAdvice,System.Reflection.MethodBase,System.Object,System.Type,System.Object[],ArxOne.MrAdvice.Advice.AdviceContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ArxOne.MrAdvice.Advice.MethodAdviceContext"/> class.
+            </summary>
+            <param name="methodAdvice">The method advice.</param>
+            <param name="targetMethod">The target method.</param>
+            <param name="target">The target.</param>
+            <param name="targetType">Type of the target.</param>
+            <param name="parameters">The parameters.</param>
+            <param name="nextAdviceContext">The next advice context.</param>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.MethodAdviceContext.Invoke">
+            <summary>
+            Invokes the current aspect (related to this instance).
+            </summary>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Advice.MethodAsyncAdviceContext">
+            <summary>
+            Method advice context, passed to method advisors
+            </summary>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.MethodAsyncAdviceContext.Parameters">
+            <summary>
+            Gets the parameters.
+            Each parameter can be individually changed before Call.Proceed()
+            </summary>
+            <value>
+            The parameters.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.MethodAsyncAdviceContext.Arguments">
+            <summary>
+            Gets the argument.
+            Each argument can be individually changed before Call.Proceed()
+            </summary>
+            <value>
+            The arguments.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.MethodAsyncAdviceContext.HasReturnValue">
+            <summary>
+            Gets a value indicating whether the advised method has a return value.
+            </summary>
+            <value>
+            <c>true</c> if this instance has return value; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.MethodAsyncAdviceContext.ReturnValue">
+            <summary>
+            Gets or sets the return value (after Call.Proceed()).
+            </summary>
+            <value>
+            The return value.
+            </value>
+            <exception cref="T:System.InvalidOperationException" accessor="get">Method has no ReturnValue</exception>
+            <exception cref="T:System.InvalidOperationException" accessor="set">Method has no ReturnValue</exception>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.MethodAsyncAdviceContext.TargetMethod">
+            <summary>
+            Gets the target method.
+            </summary>
+            <value>
+            The target method.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.MethodAsyncAdviceContext.TargetName">
+            <summary>
+            Gets the name of the target.
+            </summary>
+            <value>
+            The name of the target.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.MethodAsyncAdviceContext.IsTargetMethodAsync">
+            <summary>
+            Gets a value indicating whether the target method is asynchronous.
+            </summary>
+            <value>
+            <c>true</c> if the target method is asynchronous; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.MethodAsyncAdviceContext.#ctor(ArxOne.MrAdvice.Advice.IMethodAsyncAdvice,System.Reflection.MethodBase,ArxOne.MrAdvice.Advice.AdviceValues,ArxOne.MrAdvice.Advice.AdviceContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ArxOne.MrAdvice.Advice.MethodAdviceContext" /> class.
+            </summary>
+            <param name="methodAdvice">The method advice.</param>
+            <param name="targetMethod">The target method.</param>
+            <param name="adviceValues">The call values.</param>
+            <param name="nextAdviceContext">The next advice context.</param>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.MethodAsyncAdviceContext.#ctor(ArxOne.MrAdvice.Advice.IMethodAsyncAdvice,System.Reflection.MethodBase,System.Object,System.Type,System.Object[],ArxOne.MrAdvice.Advice.AdviceContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ArxOne.MrAdvice.Advice.MethodAsyncAdviceContext"/> class.
+            </summary>
+            <param name="methodAdvice">The method advice.</param>
+            <param name="targetMethod">The target method.</param>
+            <param name="target">The target.</param>
+            <param name="targetType">Type of the target.</param>
+            <param name="parameters">The parameters.</param>
+            <param name="nextAdviceContext">The next advice context.</param>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.MethodAsyncAdviceContext.ProceedAsync">
+            <summary>
+            Proceeds to the next advice, asynchronously
+            </summary>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.MethodAsyncAdviceContext.Invoke">
+            <summary>
+            Invokes the current aspect (related to this instance).
+            </summary>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Advice.MethodInfoAdviceContext">
+            <summary>
+            Info context for MethodBase
+            </summary>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.MethodInfoAdviceContext.TargetMethod">
+            <summary>
+            Gets the target method.
+            </summary>
+            <value>
+            The target method.
+            </value>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.MethodInfoAdviceContext.#ctor(System.Reflection.MethodBase)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ArxOne.MrAdvice.Advice.MethodInfoAdviceContext"/> class.
+            </summary>
+            <param name="targetMethod">The target method.</param>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Advice.MethodWeavingContext">
+            <summary>
+            Context for <see cref="T:ArxOne.MrAdvice.Advice.IMethodWeavingAdvice"/>
+            </summary>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.MethodWeavingContext.TargetMethodName">
+            <summary>
+            Gets or sets the name of the target method.
+            </summary>
+            <value>
+            The name of the target method.
+            </value>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.MethodWeavingContext.#ctor(System.Type,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ArxOne.MrAdvice.Advice.MethodWeavingContext" /> class.
+            </summary>
+            <param name="type">The type.</param>
+            <param name="targetMethodName">Name of the target method.</param>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Advice.ParameterAdviceContext">
+            <summary>
+            Parameter advice context, passed to parameter advisors
+            </summary>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.ParameterAdviceContext.TargetParameter">
+            <summary>
+            Gets the parameter information.
+            </summary>
+            <value>
+            The parameter information.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.ParameterAdviceContext.TargetName">
+            <summary>
+            Gets the name of the target.
+            </summary>
+            <value>
+            The name of the target.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.ParameterAdviceContext.ParameterType">
+            <summary>
+            Gets the raw type (stripped from ref if any).
+            </summary>
+            <value>
+            The type.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.ParameterAdviceContext.IsIn">
+            <summary>
+            Gets a value indicating whether this parameter is input.
+            </summary>
+            <value>
+              <c>true</c> if this instance is in; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.ParameterAdviceContext.IsOut">
+            <summary>
+            Gets a value indicating whether this instance is output.
+            </summary>
+            <value>
+              <c>true</c> if this instance is out; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.ParameterAdviceContext.Value">
+            <summary>
+            Gets or sets the parameter value.
+            </summary>
+            <value>
+            The value.
+            </value>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.ParameterAdviceContext.GetValue``1">
+            <summary>
+            Gets the typed value.
+            </summary>
+            <typeparam name="TValue">The type of the value.</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.ParameterAdviceContext.SetValue``1(``0)">
+            <summary>
+            Sets the typed value.
+            </summary>
+            <typeparam name="TValue">The type of the value.</typeparam>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.ParameterAdviceContext.#ctor(ArxOne.MrAdvice.Advice.IParameterAdvice,System.Reflection.ParameterInfo,System.Int32,ArxOne.MrAdvice.Advice.AdviceValues,ArxOne.MrAdvice.Advice.AdviceContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ArxOne.MrAdvice.Advice.ParameterAdviceContext" /> class.
+            </summary>
+            <param name="parameterAdvice">The parameter advice.</param>
+            <param name="targetParameter">The parameter information.</param>
+            <param name="parameterIndex">Index of the parameter.</param>
+            <param name="adviceValues">The advice values.</param>
+            <param name="nextAdviceContext">The next advice context.</param>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.ParameterAdviceContext.#ctor(ArxOne.MrAdvice.Advice.IParameterAdvice,System.Reflection.ParameterInfo,System.Int32,System.Object,System.Type,System.Object[],ArxOne.MrAdvice.Advice.AdviceContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ArxOne.MrAdvice.Advice.ParameterAdviceContext"/> class.
+            </summary>
+            <param name="parameterAdvice">The parameter advice.</param>
+            <param name="targetParameter">The target parameter.</param>
+            <param name="parameterIndex">Index of the parameter.</param>
+            <param name="target">The target.</param>
+            <param name="targetType">Type of the target.</param>
+            <param name="parameters">The parameters.</param>
+            <param name="nextAdviceContext">The next advice context.</param>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.ParameterAdviceContext.Invoke">
+            <summary>
+            Invokes the current aspect (related to this instance).
+            </summary>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Advice.EventAdviceContext">
+            <summary>
+            Property advice context, passed to property advisors
+            </summary>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.EventAdviceContext.Value">
+            <summary>
+            Gets or sets the event delegate.
+            </summary>
+            <value>
+            The delegate.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.EventAdviceContext.IsAdder">
+            <summary>
+            Gets a value indicating whether this context is an adder (the event.add method).
+            </summary>
+            <value>
+              <c>true</c> if this instance is adder; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.EventAdviceContext.IsRemover">
+            <summary>
+            Gets a value indicating whether this context is a remover (the event.remove method).
+            </summary>
+            <value>
+              <c>true</c> if this instance is remover; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.EventAdviceContext.TargetEvent">
+            <summary>
+            Gets the target event.
+            </summary>
+            <value>
+            The target event.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.EventAdviceContext.TargetName">
+            <summary>
+            Gets the name of the target.
+            </summary>
+            <value>
+            The name of the target.
+            </value>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.EventAdviceContext.#ctor(ArxOne.MrAdvice.Advice.IEventAdvice,System.Reflection.EventInfo,System.Boolean,ArxOne.MrAdvice.Advice.AdviceValues,ArxOne.MrAdvice.Advice.AdviceContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ArxOne.MrAdvice.Advice.PropertyAdviceContext" /> class.
+            </summary>
+            <param name="eventAdvice">The event advice.</param>
+            <param name="eventInfo">The event information.</param>
+            <param name="isAdder">if set to <c>true</c> [is adder].</param>
+            <param name="adviceValues">The advice values.</param>
+            <param name="nextAdviceContext">The next advice context.</param>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.EventAdviceContext.Invoke">
+            <summary>
+            Invokes the current aspect (related to this instance).
+            </summary>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Advice.PropertyAdviceContext">
+            <summary>
+            Property advice context, passed to property advisors
+            </summary>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.PropertyAdviceContext.Index">
+            <summary>
+            Gets the index(es) for property.
+            </summary>
+            <value>
+            The index(es).
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.PropertyAdviceContext.HasValue">
+            <summary>
+            Gets a value indicating whether the property call has a value (is a setter, actually).
+            </summary>
+            <value>
+              <c>true</c> if this instance has value; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.PropertyAdviceContext.Value">
+            <summary>
+            Gets or sets the property value (for setters only).
+            </summary>
+            <value>
+            The value.
+            </value>
+            <exception cref="T:System.InvalidOperationException">
+            Method has no Value
+            or
+            Method has no Value
+            </exception>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.PropertyAdviceContext.HasReturnValue">
+            <summary>
+            Gets a value indicating whether the property has return value (is a getter, actually).
+            </summary>
+            <value>
+            <c>true</c> if this instance has return value; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.PropertyAdviceContext.ReturnValue">
+            <summary>
+            Gets or sets the return value (after Proceed()).
+            </summary>
+            <value>
+            The return value.
+            </value>
+            <exception cref="T:System.InvalidOperationException" accessor="get">Method has no ReturnValue</exception>
+            <exception cref="T:System.InvalidOperationException" accessor="set">Method has no ReturnValue</exception>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.PropertyAdviceContext.IsGetter">
+            <summary>
+            Gets a value indicating whether this context is a getter.
+            </summary>
+            <value>
+              <c>true</c> if this instance is getter; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.PropertyAdviceContext.IsSetter">
+            <summary>
+            Gets a value indicating whether this context is a setter.
+            </summary>
+            <value>
+              <c>true</c> if this instance is setter; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.PropertyAdviceContext.TargetProperty">
+            <summary>
+            Gets the target property.
+            </summary>
+            <value>
+            The target property.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.PropertyAdviceContext.TargetName">
+            <summary>
+            Gets the name of the target.
+            </summary>
+            <value>
+            The name of the target.
+            </value>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.PropertyAdviceContext.#ctor(ArxOne.MrAdvice.Advice.IPropertyAdvice,System.Reflection.PropertyInfo,System.Boolean,ArxOne.MrAdvice.Advice.AdviceValues,ArxOne.MrAdvice.Advice.AdviceContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ArxOne.MrAdvice.Advice.PropertyAdviceContext"/> class.
+            </summary>
+            <param name="propertyAdvice">The property advice.</param>
+            <param name="propertyInfo">The property information.</param>
+            <param name="isSetter">if set to <c>true</c> [is setter].</param>
+            <param name="adviceValues">The advice values.</param>
+            <param name="nextAdviceContext">The next advice context.</param>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.PropertyAdviceContext.#ctor(ArxOne.MrAdvice.Advice.IPropertyAdvice,System.Reflection.PropertyInfo,System.Boolean,System.Object,System.Type,System.Object[],ArxOne.MrAdvice.Advice.AdviceContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ArxOne.MrAdvice.Advice.PropertyAdviceContext"/> class.
+            </summary>
+            <param name="propertyAdvice">The property advice.</param>
+            <param name="propertyInfo">The property information.</param>
+            <param name="isSetter">if set to <c>true</c> [is setter].</param>
+            <param name="target">The target.</param>
+            <param name="targetType">Type of the target.</param>
+            <param name="parameters">The parameters.</param>
+            <param name="nextAdviceContext">The next advice context.</param>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.PropertyAdviceContext.Invoke">
+            <summary>
+            Invokes the current aspect (related to this instance).
+            </summary>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Advice.PropertyInfoAdviceContext">
+            <summary>
+            Info context for MethodBase
+            </summary>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.PropertyInfoAdviceContext.TargetProperty">
+            <summary>
+            Gets the target method.
+            </summary>
+            <value>
+            The target method.
+            </value>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.PropertyInfoAdviceContext.#ctor(System.Reflection.PropertyInfo)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ArxOne.MrAdvice.Advice.PropertyInfoAdviceContext"/> class.
+            </summary>
+            <param name="targetProperty">The target property.</param>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Advice.SyncAdviceContext">
+            <summary>
+            Sync advice context
+            </summary>
+            <seealso cref="T:ArxOne.MrAdvice.Advice.AdviceContext" />
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.SyncAdviceContext.Proceed">
+            <summary>
+            Proceeds to the next advice
+            </summary>
+            <remarks>On async methods, this method may return before the task completes. To wait for full completion, 
+            implement <see cref="T:ArxOne.MrAdvice.Advice.IMethodAsyncAdvice"/> and use ProceedAsync() method</remarks>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Advice.WeavingContext">
+            <summary>
+            Base context to type
+            </summary>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Advice.WeavingContext.Type">
+            <summary>
+            Gets the type.
+            </summary>
+            <value>
+            The type.
+            </value>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.WeavingContext.#ctor(System.Type)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ArxOne.MrAdvice.Advice.WeavingContext"/> class.
+            </summary>
+            <param name="type">The type.</param>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.WeavingContext.AddPublicAutoProperty(System.String,System.Type)">
+            <summary>
+            Adds the public automatic property.
+            </summary>
+            <param name="propertyName"></param>
+            <param name="propertyType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.WeavingContext.AddInitializer(System.Action{System.Object})">
+            <summary>
+            Adds an initializer to all ctors (at the end of them).
+            </summary>
+            <param name="initializer">The initializer, which receives the instance as parameter.</param>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Advice.WeavingContext.AddInitializerOnce(System.Action{System.Object})">
+            <summary>
+            Adds an initializer once to all ctors (even if the method is called several times).
+            </summary>
+            <param name="initializer">The initializer.</param>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Annotation.AbstractTargetAttribute">
+            <summary>
+            An advice marked with this attribute will remove the target property/method
+            </summary>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Annotation.AbstractTargetAttribute.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ArxOne.MrAdvice.Annotation.AbstractTargetAttribute"/> class.
+            </summary>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Annotation.ExcludeAdvicesAttribute">
+            <summary>
+            Allows a class to be advice-proof, by specifying which advices won't apply
+            </summary>
+            <seealso cref="T:System.Attribute" />
+        </member>
+        <member name="P:ArxOne.MrAdvice.Annotation.ExcludeAdvicesAttribute.AdvicesTypes">
+            <summary>
+            Gets or sets the name matching patterns.
+            Default is extended Wildcard, Regex mode is enabled by using ^ at start or $ at end
+            </summary>
+            <value>
+            The name.
+            </value>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Annotation.ExcludeAdvicesAttribute.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ArxOne.MrAdvice.Annotation.ExcludeAdvicesAttribute"/> class.
+            </summary>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Annotation.ExcludeAdvicesAttribute.#ctor(System.String[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:ArxOne.MrAdvice.Annotation.ExcludeAdvicesAttribute" /> class.
+            </summary>
+            <param name="advicesTypes">The types.</param>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Annotation.ExcludePointcutAttribute">
+            <summary>
+            Exclusion filters for pointcuts.
+            This has to be applied on advices
+            </summary>
+            <seealso cref="T:ArxOne.MrAdvice.Annotation.PointcutAttribute" />
+        </member>
+        <member name="M:ArxOne.MrAdvice.Annotation.ExcludePointcutAttribute.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ArxOne.MrAdvice.Annotation.ExcludePointcutAttribute"/> class.
+            </summary>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Annotation.ExcludePointcutAttribute.#ctor(System.String[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:ArxOne.MrAdvice.Annotation.ExcludePointcutAttribute"/> class.
+            </summary>
+            <param name="names">The names.</param>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Annotation.ExecutionPointAttribute">
+            <summary>
+            Applied to generated inner methods
+            </summary>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Annotation.IncludePointcutAttribute">
+            <summary>
+            Exclusion filters for pointcuts.
+            This has to be applied on advices
+            </summary>
+            <seealso cref="T:ArxOne.MrAdvice.Annotation.PointcutAttribute" />
+        </member>
+        <member name="M:ArxOne.MrAdvice.Annotation.IncludePointcutAttribute.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ArxOne.MrAdvice.Annotation.IncludePointcutAttribute"/> class.
+            </summary>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Annotation.IncludePointcutAttribute.#ctor(System.String[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:ArxOne.MrAdvice.Annotation.IncludePointcutAttribute"/> class.
+            </summary>
+            <param name="names">The names.</param>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Annotation.MemberAttributes">
+            <summary>
+            Pointcut member matching attributes
+            </summary>
+        </member>
+        <member name="F:ArxOne.MrAdvice.Annotation.MemberAttributes.PublicGlobalType">
+            <summary>
+            Public type
+            </summary>
+        </member>
+        <member name="F:ArxOne.MrAdvice.Annotation.MemberAttributes.PublicNestedType">
+            <summary>
+            Public nested type
+            </summary>
+        </member>
+        <member name="F:ArxOne.MrAdvice.Annotation.MemberAttributes.PublicMember">
+            <summary>
+            Public member
+            </summary>
+        </member>
+        <member name="F:ArxOne.MrAdvice.Annotation.MemberAttributes.PublicType">
+            <summary>
+            Any public type
+            </summary>
+        </member>
+        <member name="F:ArxOne.MrAdvice.Annotation.MemberAttributes.FamilyNestedType">
+            <summary>
+            Family nested type
+            </summary>
+        </member>
+        <member name="F:ArxOne.MrAdvice.Annotation.MemberAttributes.FamilyMember">
+            <summary>
+            Member is accessible only from type and inherited types
+            Yes, that's "protected"
+            </summary>
+        </member>
+        <member name="F:ArxOne.MrAdvice.Annotation.MemberAttributes.FamilyType">
+            <summary>
+            Family type
+            </summary>
+        </member>
+        <member name="F:ArxOne.MrAdvice.Annotation.MemberAttributes.PrivateGlobalType">
+            <summary>
+            Type is private to assembly
+            Yes, that's "assembly"
+            </summary>
+        </member>
+        <member name="F:ArxOne.MrAdvice.Annotation.MemberAttributes.PrivateNestedType">
+            <summary>
+            Private nested type
+            </summary>
+        </member>
+        <member name="F:ArxOne.MrAdvice.Annotation.MemberAttributes.PrivateMember">
+            <summary>
+            Private member
+            </summary>
+        </member>
+        <member name="F:ArxOne.MrAdvice.Annotation.MemberAttributes.PrivateType">
+            <summary>
+            Anything private (that won't go out of the assembly)
+            </summary>
+        </member>
+        <member name="F:ArxOne.MrAdvice.Annotation.MemberAttributes.AssemblyNestedType">
+            <summary>
+            The assembly nested type
+            A nested type accessible from everywhere in assembly
+            </summary>
+        </member>
+        <member name="F:ArxOne.MrAdvice.Annotation.MemberAttributes.AssemblyMember">
+            <summary>
+            The assembly member
+            (A member accessible from anywhere in assembly)
+            </summary>
+        </member>
+        <member name="F:ArxOne.MrAdvice.Annotation.MemberAttributes.FamilyOrAssemblyMember">
+            <summary>
+            The family or assembly member
+            </summary>
+        </member>
+        <member name="F:ArxOne.MrAdvice.Annotation.MemberAttributes.FamilyOrAssemblyType">
+            <summary>
+            The family or assembly type
+            </summary>
+        </member>
+        <member name="F:ArxOne.MrAdvice.Annotation.MemberAttributes.FamilyAndAssemblyMember">
+            <summary>
+            The family and assembly member
+            </summary>
+        </member>
+        <member name="F:ArxOne.MrAdvice.Annotation.MemberAttributes.FamilyAndAssemblyType">
+            <summary>
+            The family and assembly type
+            </summary>
+        </member>
+        <member name="F:ArxOne.MrAdvice.Annotation.MemberAttributes.AnyType">
+            <summary>
+            Matches any type visibility
+            </summary>
+        </member>
+        <member name="F:ArxOne.MrAdvice.Annotation.MemberAttributes.AnyMember">
+            <summary>
+            Matches any member visibility
+            </summary>
+        </member>
+        <member name="F:ArxOne.MrAdvice.Annotation.MemberAttributes.AnyAccessibility">
+            <summary>
+            Any visiblity
+            </summary>
+        </member>
+        <member name="F:ArxOne.MrAdvice.Annotation.MemberAttributes.Any">
+            <summary>
+            Any attribute. ANY. ANY!
+            </summary>
+        </member>
+        <member name="F:ArxOne.MrAdvice.Annotation.MemberAttributes.ProtectedMember">
+            <summary>
+            Protected (for C# familiars)
+            </summary>
+        </member>
+        <member name="F:ArxOne.MrAdvice.Annotation.MemberAttributes.InternalMember">
+            <summary>
+            Internal (for C# familiars)
+            </summary>
+        </member>
+        <member name="F:ArxOne.MrAdvice.Annotation.MemberAttributes.InternalType">
+            <summary>
+            Internal type (for C# dudes)
+            </summary>
+        </member>
+        <member name="F:ArxOne.MrAdvice.Annotation.MemberAttributes.ProtectedInternalMember">
+            <summary>
+            Protected internal (for C# friends)
+            </summary>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Annotation.PointcutAttribute">
+            <summary>
+            Allows to include or exclude namespaces/types/methods/etc. from being advised
+            </summary>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Annotation.PointcutAttribute.Names">
+            <summary>
+            Gets or sets the name matching patterns.
+            Default is extended Wildcard, Regex mode is enabled by using ^ at start or $ at end
+            </summary>
+            <value>
+            The name.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Annotation.PointcutAttribute.Attributes">
+            <summary>
+            Gets or sets the attributes to match.
+            </summary>
+            <value>
+            The attributes.
+            </value>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Annotation.PointcutAttribute.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ArxOne.MrAdvice.Annotation.PointcutAttribute"/> class.
+            </summary>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Annotation.PointcutAttribute.#ctor(System.String[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:ArxOne.MrAdvice.Annotation.PointcutAttribute"/> class.
+            </summary>
+            <param name="names">The names.</param>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Annotation.PriorityAttribute">
+            <summary>
+            Marks an advice with priority.
+            Advices are sorted from higher to lower (higher are processed first, lower last)
+            If no priority is specified, the value is taken from DefaulLevel
+            </summary>
+        </member>
+        <member name="F:ArxOne.MrAdvice.Annotation.PriorityAttribute.DefaultLevel">
+            <summary>
+            The default level (when Priority is not specified on the advice)
+            </summary>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Annotation.PriorityAttribute.Level">
+            <summary>
+            Gets or sets the level.
+            </summary>
+            <value>
+            The level.
+            </value>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Annotation.PriorityAttribute.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ArxOne.MrAdvice.Annotation.PriorityAttribute"/> class.
+            Assigns a priority
+            </summary>
+            <param name="level">The level.</param>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Annotation.PriorityAttribute.GetLevel(ArxOne.MrAdvice.Advice.IAdvice)">
+            <summary>
+            Gets priority level from the specified advice.
+            </summary>
+            <param name="advice">The advice.</param>
+            <returns></returns>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Aspect.AdviceInfo.Advice">
+            <summary>
+            Gets the advice (always non-null).
+            </summary>
+            <value>
+            The advice.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Aspect.AdviceInfo.MethodAdvice">
+            <summary>
+            Gets the method advice or null if none.
+            </summary>
+            <value>
+            The method advice.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Aspect.AdviceInfo.AsyncMethodAdvice">
+            <summary>
+            Gets the method advice or null if none.
+            </summary>
+            <value>
+            The method advice.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Aspect.AdviceInfo.PropertyAdvice">
+            <summary>
+            Gets the property advice or null if none.
+            </summary>
+            <value>
+            The property advice.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Aspect.AdviceInfo.EventAdvice">
+            <summary>
+            Gets the event advice.
+            </summary>
+            <value>
+            The event advice.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Aspect.AdviceInfo.ParameterAdvice">
+            <summary>
+            Gets the parameter advice, or null if none.
+            </summary>
+            <value>
+            The parameter advice.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Aspect.AdviceInfo.ParameterIndex">
+            <summary>
+            Gets the index of the parameter, if any (-1 stands for return value).
+            </summary>
+            <value>
+            The index of the parameter.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Aspect.AdviceInfo.IntroducedFields">
+            <summary>
+            Gets the introduced fields.
+            </summary>
+            <value>
+            The introduced fields.
+            </value>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Aspect.AdviceInfo.#ctor(ArxOne.MrAdvice.Advice.IAdvice)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ArxOne.MrAdvice.Aspect.AdviceInfo"/> class.
+            </summary>
+            <param name="advice">The advice.</param>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Aspect.AdviceInfo.#ctor(ArxOne.MrAdvice.Advice.IAdvice,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ArxOne.MrAdvice.Aspect.AdviceInfo"/> class, specialized for parameters or return values.
+            </summary>
+            <param name="advice">The advice.</param>
+            <param name="parameterIndex">Index of the parameter.</param>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Aspect.AdviceInfo.IsIntroduction(System.Reflection.MemberInfo)">
+            <summary>
+            Determines whether the specified member type is introduction.
+            </summary>
+            <param name="memberInfo">The member information.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Aspect.AdviceInfo.GetIntroducedType(System.Reflection.MemberInfo)">
+            <summary>
+            Determines whether the specified member type is introduction.
+            </summary>
+            <param name="memberInfo">The member information.</param>
+            <returns></returns>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Aspect.AspectInfo">
+            <summary>
+            Aspect, with pointcut and advices applied to it
+            </summary>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Aspect.AspectInfo.Advices">
+            <summary>
+            Gets the advices applied to pointcut in this aspect.
+            </summary>
+            <value>
+            The advices.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Aspect.AspectInfo.AdvisedMethod">
+            <summary>
+            Gets the advised method.
+            </summary>
+            <value>
+            The advised method.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Aspect.AspectInfo.AdvisedMethodHandle">
+            <summary>
+            Gets the advised method handle.
+            </summary>
+            <value>
+            The advised method handle.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Aspect.AspectInfo.PointcutMethod">
+            <summary>
+            Gets the pointcut method.
+            </summary>
+            <value>
+            The pointcut method.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Aspect.AspectInfo.PointcutMethodDelegate">
+            <summary>
+            Gets the pointcut (target) method delegate.
+            </summary>
+            <value>
+            The advised method delegate.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Aspect.AspectInfo.PointcutMethodHandle">
+            <summary>
+            Gets the pointcut method handle.
+            </summary>
+            <value>
+            The pointcut method handle.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Aspect.AspectInfo.PointcutProperty">
+            <summary>
+            Gets the pointcut property, if any (if method is related to property).
+            </summary>
+            <value>
+            The pointcut property.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Aspect.AspectInfo.IsPointcutPropertySetter">
+            <summary>
+            Gets a value indicating whether this instance is pointcut property setter.
+            </summary>
+            <value>
+            <c>true</c> if this instance is pointcut property setter; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Aspect.AspectInfo.PointcutEvent">
+            <summary>
+            Gets the pointcut event.
+            </summary>
+            <value>
+            The pointcut event.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Aspect.AspectInfo.IsPointcutEventAdder">
+            <summary>
+            Gets a value indicating whether this instance is pointcut event adder.
+            </summary>
+            <value>
+            <c>true</c> if this instance is pointcut event adder; otherwise (remover), <c>false</c>.
+            </value>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Aspect.AspectInfo.#ctor(System.Collections.Generic.IEnumerable{ArxOne.MrAdvice.Aspect.AdviceInfo},System.Reflection.MethodInfo,System.RuntimeMethodHandle,MrAdvice.Advice.ProceedDelegate,System.Reflection.MethodBase,System.RuntimeMethodHandle,System.Reflection.PropertyInfo,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ArxOne.MrAdvice.Aspect.AspectInfo" /> class.
+            </summary>
+            <param name="advices">The advices.</param>
+            <param name="pointcutMethod">The pointcut method.</param>
+            <param name="pointcutMethodHandle">The pointcut method handle.</param>
+            <param name="pointcutMethodDelegate"></param>
+            <param name="advisedMethod">The advised method.</param>
+            <param name="advisedMethodHandle">The advised method handle.</param>
+            <param name="pointcutProperty">The pointcut property.</param>
+            <param name="isPointcutPropertySetter">if set to <c>true</c> [is pointcut property setter].</param>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Aspect.AspectInfo.#ctor(System.Collections.Generic.IEnumerable{ArxOne.MrAdvice.Aspect.AdviceInfo},System.Reflection.MethodInfo,System.RuntimeMethodHandle,MrAdvice.Advice.ProceedDelegate,System.Reflection.MethodBase,System.RuntimeMethodHandle,System.Reflection.EventInfo,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ArxOne.MrAdvice.Aspect.AspectInfo" /> class.
+            </summary>
+            <param name="advices">The advices.</param>
+            <param name="pointcutMethod">The pointcut method.</param>
+            <param name="pointcutMethodHandle">The pointcut method handle.</param>
+            <param name="pointcutMethodDelegate"></param>
+            <param name="advisedMethod">The advised method.</param>
+            <param name="advisedMethodHandle">The advised method handle.</param>
+            <param name="pointcutEvent">The pointcut event.</param>
+            <param name="isPointcutEventAdder">if set to <c>true</c> [is pointcut event adder].</param>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Aspect.AspectInfo.#ctor(System.Collections.Generic.IEnumerable{ArxOne.MrAdvice.Aspect.AdviceInfo},System.Reflection.MethodInfo,System.RuntimeMethodHandle,MrAdvice.Advice.ProceedDelegate,System.Reflection.MethodBase,System.RuntimeMethodHandle,System.Reflection.PropertyInfo,System.Boolean,System.Reflection.EventInfo,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ArxOne.MrAdvice.Aspect.AspectInfo" /> class.
+            </summary>
+            <param name="advices">The advices.</param>
+            <param name="pointcutMethod">The pointcut method.</param>
+            <param name="pointcutMethodHandle">The pointcut method handle.</param>
+            <param name="pointcutMethodDelegate"></param>
+            <param name="advisedMethod">The advised method.</param>
+            <param name="advisedMethodHandle">The advised method handle.</param>
+            <param name="pointcutProperty">The pointcut property.</param>
+            <param name="isPointcutPropertySetter">if set to <c>true</c> [is pointcut property setter].</param>
+            <param name="pointcutEvent">The pointcut event.</param>
+            <param name="isPointcutEventAdder">if set to <c>true</c> [is pointcut event adder].</param>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Aspect.AspectInfo.#ctor(System.Collections.Generic.IEnumerable{ArxOne.MrAdvice.Aspect.AdviceInfo},System.Reflection.MethodInfo,System.RuntimeMethodHandle,MrAdvice.Advice.ProceedDelegate,System.Reflection.MethodBase,System.RuntimeMethodHandle)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ArxOne.MrAdvice.Aspect.AspectInfo" /> class.
+            </summary>
+            <param name="advices">The advices.</param>
+            <param name="pointcutMethod">The pointcut method.</param>
+            <param name="pointcutMethodHandle">The pointcut method handle.</param>
+            <param name="pointcutMethodDelegate"></param>
+            <param name="advisedMethod">The advised method.</param>
+            <param name="advisedMethodHandle">The advised method handle.</param>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Aspect.AspectInfo.AddAdvice(ArxOne.MrAdvice.Aspect.AdviceInfo)">
+            <summary>
+            Adds the advice and returns a new AspectInfo.
+            </summary>
+            <param name="adviceInfo">The advice information.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Aspect.AspectInfo.ApplyGenericParameters(System.Type[])">
+            <summary>
+            Applies the generic parameters.
+            </summary>
+            <param name="genericArguments">The generic parameters.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Aspect.AspectInfo.MakeGenericMethod(System.Reflection.MethodBase,System.RuntimeMethodHandle,System.Type[])">
+            <summary>
+            Makes a method from generic definition (type and method).
+            </summary>
+            <param name="methodBase">The method information.</param>
+            <param name="methodHandle">The method handle.</param>
+            <param name="genericArguments">The generic arguments.</param>
+            <returns></returns>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Collection.ArraySpan`1">
+            <summary>
+            Array span, based on inner arrary with start index and length
+            </summary>
+            <typeparam name="TItem">The type of the item.</typeparam>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Collection.ArraySpan`1.Count">
+            <summary>
+            Gets the number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1" />.
+            </summary>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Collection.ArraySpan`1.#ctor(System.Collections.Generic.IList{`0},System.Int32,System.Int32,System.Collections.Generic.IEqualityComparer{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ArxOne.MrAdvice.Collection.ArraySpan`1"/> class.
+            </summary>
+            <param name="innerList">The inner list, wrapped by the instance.</param>
+            <param name="startIndex">The start index (will become 0 here).</param>
+            <param name="length">The new length.</param>
+            <param name="comparer">A comparer, or null to use default.</param>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Collection.ArraySpan`1.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection.
+            </summary>
+            <returns>
+            A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that can be used to iterate through the collection.
+            </returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Collection.ArraySpan`1.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through a collection.
+            </summary>
+            <returns>
+            An <see cref="T:System.Collections.IEnumerator" /> object that can be used to iterate through the collection.
+            </returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Collection.ArraySpan`1.Contains(`0)">
+            <summary>
+            Determines whether the <see cref="T:System.Collections.Generic.ICollection`1" /> contains a specific value.
+            </summary>
+            <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.ICollection`1" />.</param>
+            <returns>
+            true if <paramref name="item" /> is found in the <see cref="T:System.Collections.Generic.ICollection`1" />; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Collection.ArraySpan`1.CopyTo(`0[],System.Int32)">
+            <summary>
+            Copies to the target array.
+            </summary>
+            <param name="array">The array.</param>
+            <param name="arrayIndex">Index of the array.</param>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Collection.ArraySpan`1.IsReadOnly">
+            <summary>
+            Gets a value indicating whether the <see cref="T:System.Collections.Generic.ICollection`1" /> is read-only.
+            </summary>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Collection.ArraySpan`1.IndexOf(`0)">
+            <summary>
+            Determines the index of a specific item in the <see cref="T:System.Collections.Generic.IList`1" />.
+            </summary>
+            <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.IList`1" />.</param>
+            <returns>
+            The index of <paramref name="item" /> if found in the list; otherwise, -1.
+            </returns>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Collection.ArraySpan`1.Item(System.Int32)">
+            <summary>
+            Gets or sets the element at the specified index.
+            </summary>
+            <param name="index">The index.</param>
+            <returns></returns>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Introduction.IntroducedField`1">
+            <summary>
+            This class allows to introduce fields in advised type
+            To use it, declare instances of it in advice,
+            then use the indexer to access introduced field in advised type instance
+            </summary>
+            <typeparam name="TFieldType">The type of the field type.</typeparam>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Introduction.IntroducedField`1.GetIntroducedField(System.Type,System.String)">
+            <summary>
+            Gets the introduced field.
+            Since the attribute may be at assembly level, the advised type is given as parameter
+            A cache is kept, by target type.
+            </summary>
+            <param name="targetType">Type of the target.</param>
+            <param name="targetName"></param>
+            <returns></returns>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Introduction.IntroducedField`1.Item(ArxOne.MrAdvice.Advice.IAdviceContextTarget)">
+            <summary>
+            Gets or sets the <see typeparamref="TFieldType"/> with the specified context.
+            </summary>
+            <value>
+            The <see typeparamref="TFieldType"/>.
+            </value>
+            <param name="context">The context.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Introduction.IntroducedField`1.#ctor(ArxOne.MrAdvice.Advice.IAdvice,System.Reflection.MemberInfo)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ArxOne.MrAdvice.Introduction.IntroducedField`1" /> class.
+            </summary>
+            <param name="ownerAdvice">The owner advice.</param>
+            <param name="ownerMemberInfo">The owner member information.</param>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Introduction.IntroducedFieldAttribute">
+            <summary>
+            Internal marker to match introduced fields and advices
+            just in case some obfuscator would rename the fields
+            </summary>
+        </member>
+        <member name="F:ArxOne.MrAdvice.Introduction.IntroducedFieldAttribute.LinkID">
+            <summary>
+            The link identifier
+            </summary>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Introduction.IntroductionRules">
+            <summary>
+            Introduction rules, shared between weaver and weavisor assemblies
+            </summary>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Introduction.IntroductionRules.GetName(System.String,System.String,System.String,System.String)">
+            <summary>
+            Gets a unique name for an introduced field, related to advice and advice member name.
+            </summary>
+            <param name="adviceNamespace">The advice namespace.</param>
+            <param name="adviceName">Name of the advice.</param>
+            <param name="advisedMemberName"></param>
+            <param name="adviceMemberName">Name of the advice member.</param>
+            <returns></returns>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Invocation">
+            <summary>
+            Exposes a method to start advisors chain call
+            This class is public, since call from generated assembly.
+            Semantically, it is internal.
+            </summary>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Invocation.ProceedAdvice(System.Object,System.Object[],System.RuntimeMethodHandle,System.RuntimeMethodHandle,System.RuntimeTypeHandle,System.Boolean,System.Type[])">
+            <summary>
+            Runs a method interception.
+            This version is kept for compatibility, the new method to be colled is <see cref="M:ArxOne.MrAdvice.Invocation.ProceedAdvice2(System.Object,System.Object[],System.RuntimeMethodHandle,System.RuntimeMethodHandle,System.RuntimeMethodHandle,System.RuntimeTypeHandle,System.Boolean,System.Type[])"/>
+            it will be easier from C# code
+            </summary>
+            <param name="target">The target.</param>
+            <param name="parameters">The parameters.</param>
+            <param name="methodHandle">The method handle.</param>
+            <param name="innerMethodHandle">The inner method handle.</param>
+            <param name="typeHandle">The type handle.</param>
+            <param name="abstractedTarget">if set to <c>true</c> [abstracted target].</param>
+            <param name="genericArguments">The generic arguments.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Invocation.ProceedAdvice2(System.Object,System.Object[],System.RuntimeMethodHandle,System.RuntimeMethodHandle,System.RuntimeMethodHandle,System.RuntimeTypeHandle,System.Boolean,System.Type[])">
+            <summary>
+            Runs a method interception.
+            We use a static method here, if one day we want to reuse Invocations or change mecanism,
+            it will be easier from C# code
+            </summary>
+            <param name="target">The target.</param>
+            <param name="parameters">The parameters.</param>
+            <param name="methodHandle">The method handle.</param>
+            <param name="innerMethodHandle">The inner method handle.</param>
+            <param name="delegatableMethodHandle">The delegatable method handle.</param>
+            <param name="typeHandle">The type handle.</param>
+            <param name="abstractedTarget">if set to <c>true</c> [abstracted target].</param>
+            <param name="genericArguments">The generic arguments (to static type and/or method) in a single array.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Invocation.GetMethodFromHandle(System.RuntimeMethodHandle,System.RuntimeTypeHandle)">
+            <summary>
+            Gets the method from handle.
+            </summary>
+            <param name="methodHandle">The method handle.</param>
+            <param name="typeHandle">The type handle.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Invocation.GetResult(System.Threading.Tasks.Task,ArxOne.MrAdvice.Advice.AdviceValues)">
+            <summary>
+            Gets the result.
+            </summary>
+            <param name="advisedTask">The advised task.</param>
+            <param name="adviceValues">The advice values.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Invocation.FlattenException(System.Exception)">
+            <summary>
+            Flattens the exception (removes aggregate exception).
+            </summary>
+            <param name="e">The e.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Invocation.GetAspectInfo(System.RuntimeMethodHandle,System.RuntimeMethodHandle,System.RuntimeMethodHandle,System.RuntimeTypeHandle,System.Boolean,System.Type[])">
+            <summary>
+            Gets the aspect information.
+            </summary>
+            <param name="methodHandle">The method handle.</param>
+            <param name="innerMethodHandle">The inner method handle.</param>
+            <param name="delegatableMethodHandle">The delegatable method handle.</param>
+            <param name="typeHandle">The type handle.</param>
+            <param name="abstractedTarget">if set to <c>true</c> [abstracted target].</param>
+            <param name="genericArguments">The generic arguments.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Invocation.GetParameterInfo(System.Reflection.MethodBase,System.Int32)">
+            <summary>
+            Gets the parameter information.
+            </summary>
+            <param name="methodBase">The method base.</param>
+            <param name="parameterIndex">Index of the parameter.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Invocation.ProcessInfoAdvices(System.Reflection.Assembly)">
+            <summary>
+            Processes the info advices.
+            </summary>
+            <param name="assembly">The assembly.</param>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Invocation.ProcessInfoAdvices(System.Type)">
+            <summary>
+            Processes the info advices.
+            </summary>
+            <param name="type">The type.</param>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Invocation.ProcessMethodInfoAdvices(System.Reflection.MethodBase,System.Collections.Generic.IEnumerable{ArxOne.MrAdvice.Advice.IMethodInfoAdvice})">
+            <summary>
+            Processes the info advices for MethodInfo.
+            </summary>
+            <param name="methodInfo">The method information.</param>
+            <param name="typeAndAssemblyMethodInfoAdvices">The type and assembly method information advices.</param>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Invocation.ProcessPropertyInfoAdvices(System.Reflection.PropertyInfo)">
+            <summary>
+            Processes the info advices for PropertyInfo.
+            </summary>
+            <param name="propertyInfo">The property information.</param>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Invocation.CreateAspectInfo(System.Reflection.MethodBase,System.RuntimeMethodHandle,System.Reflection.MethodInfo,System.RuntimeMethodHandle,MrAdvice.Advice.ProceedDelegate,System.Boolean)">
+            <summary>
+            Creates the method call context, given a calling method and the inner method name.
+            </summary>
+            <param name="method">The method information.</param>
+            <param name="methodHandle">The method handle.</param>
+            <param name="innerMethod">Name of the inner method.</param>
+            <param name="innerMethodHandle">The inner method handle.</param>
+            <param name="innerMethodDelegate"></param>
+            <param name="abstractedTarget">if set to <c>true</c> [abstracted target].</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Invocation.FindInterfaceMethod(System.Reflection.MethodBase)">
+            <summary>
+            Finds the interface method implemented.
+            </summary>
+            <param name="implementationMethodBase">The method base.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Invocation.GetAllAdvices``1(System.Reflection.MethodBase,System.Tuple{System.Reflection.PropertyInfo,System.Boolean}@,System.Tuple{System.Reflection.EventInfo,System.Boolean}@)">
+            <summary>
+            Gets all advices available for this method.
+            </summary>
+            <typeparam name="TAdvice">The type of the advice.</typeparam>
+            <param name="targetMethod">The target method.</param>
+            <param name="relatedPropertyInfo">The related property information.</param>
+            <param name="relatedEventInfo">The related event information.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Invocation.GetTypeAndParentAdvices``1(System.Type)">
+            <summary>
+            Gets advices applied to type and parent, regarding the <see cref="P:System.AttributeUsageAttribute.Inherited"/> flag for parent types.
+            </summary>
+            <typeparam name="TAdvice">The type of the advice.</typeparam>
+            <param name="type">The type.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Invocation.IsInheritable(System.Object)">
+            <summary>
+            Determines whether the specified attribute is inheritable.
+            </summary>
+            <param name="attribute">The attribute.</param>
+            <returns>
+              <c>true</c> if the specified attribute is inheritable; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Invocation.GetPropertyInfo(System.Reflection.MemberInfo)">
+            <summary>
+            Gets the PropertyInfo, related to a method.
+            </summary>
+            <param name="memberInfo">The member information.</param>
+            <returns>A tuple with the PropertyInfo and true is method is a setter (false for a getter)</returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Invocation.GetEventInfo(System.Reflection.MemberInfo)">
+            <summary>
+            Gets the EventInfo, related to a method.
+            </summary>
+            <param name="memberInfo">The member information.</param>
+            <returns>A tuple with the PropertyInfo and true is method is a setter (false for a getter)</returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Invocation.SafeInjectIntroducedFields(ArxOne.MrAdvice.Advice.IAdvice,System.Type)">
+            <summary>
+            Injects the introduced fields to advice.
+            Allows null advices (and does nothing)
+            </summary>
+            <param name="advice">The advice.</param>
+            <param name="advisedType">Type of the advised.</param>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Invocation.InjectIntroducedFields(ArxOne.MrAdvice.Aspect.AdviceInfo,System.Type)">
+            <summary>
+            Injects the introduced fields.
+            </summary>
+            <param name="adviceInfo">The advice information.</param>
+            <param name="advisedType">Type of the advised.</param>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Invocation.InjectIntroducedFields(ArxOne.MrAdvice.Advice.IAdvice,System.Type,System.Collections.Generic.IList{System.Reflection.MemberInfo})">
+            <summary>
+            Injects the introduced fields to advice.
+            </summary>
+            <param name="advice">The advice.</param>
+            <param name="advisedType">Type of the advised.</param>
+            <param name="introducedFields">The introduced fields.</param>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Invocation.InjectIntroducedField(ArxOne.MrAdvice.Advice.IAdvice,System.Reflection.MemberInfo,System.Type)">
+            <summary>
+            Injects the introduced field.
+            </summary>
+            <param name="advice">The advice.</param>
+            <param name="adviceMemberInfo">The member information.</param>
+            <param name="advisedType">Type of the advised.</param>
+            <exception cref="T:System.InvalidOperationException">Internal error, can not find matching introduced field</exception>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Invocation.FindIntroducedField(ArxOne.MrAdvice.Advice.IAdvice,System.Reflection.MemberInfo,System.Type,System.String)">
+            <summary>
+            Finds the introduced field.
+            </summary>
+            <param name="advice">The advice.</param>
+            <param name="adviceMemberInfo">The advice member information.</param>
+            <param name="advisedType">Type of the advised.</param>
+            <param name="advisedMemberName"></param>
+            <returns></returns>
+            <exception cref="T:System.InvalidOperationException">Internal error, can not find matching introduced field</exception>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Invocation.IsIntroduction(System.Reflection.MemberInfo)">
+            <summary>
+            Determines whether the specified member type is introduction.
+            </summary>
+            <param name="memberInfo">The member information.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Invocation.GetIntroducedType(System.Reflection.MemberInfo)">
+            <summary>
+            Determines whether the specified member type is introduction.
+            </summary>
+            <param name="memberInfo">The member information.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Invocation.FindIntroducedFieldByName(System.Type,System.String,System.String,System.Reflection.BindingFlags)">
+            <summary>
+            Finds the introduced field in the advised class, by name.
+            </summary>
+            <param name="advisedType">Type of the advised.</param>
+            <param name="introducedFieldName">Name of the introduced field.</param>
+            <param name="linkID">The link identifier.</param>
+            <param name="bindingFlags">The binding flags.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Invocation.FindIntroducedFieldByTypeAndAvailability(System.Type,System.Type,System.Boolean,System.String,System.Reflection.BindingFlags)">
+            <summary>
+            Finds the introduced field by type and availability.
+            </summary>
+            <param name="advisedType">Type of the advised.</param>
+            <param name="fieldType">Type of the field.</param>
+            <param name="isStatic">if set to <c>true</c> [is static].</param>
+            <param name="linkID">The link identifier.</param>
+            <param name="bindingFlags">The binding flags.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Invocation.GetAdviceSelector(System.Reflection.MethodBase)">
+            <summary>
+            Gets the exclude selector.
+            </summary>
+            <param name="methodBase">The method base.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Invocation.GetPointcutSelector(System.Type)">
+            <summary>
+            Gets the <see cref="T:ArxOne.MrAdvice.Pointcut.PointcutSelector"/> related to given advice attribute type.
+            </summary>
+            <param name="adviceType">Type of the advice.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Invocation.CreatePointcutSelector(System.Type)">
+            <summary>
+            Creates a <see cref="T:ArxOne.MrAdvice.Pointcut.PointcutSelector"/> for given advice attribute.
+            </summary>
+            <param name="adviceType">Type of the advice.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Invocation.CreatePointcutSelectorRule(System.Type,ArxOne.MrAdvice.Annotation.PointcutAttribute)">
+            <summary>
+            Creates the <see cref="T:ArxOne.MrAdvice.Pointcut.PointcutSelectorRule"/> from a <see cref="T:ArxOne.MrAdvice.Annotation.PointcutAttribute"/>.
+            </summary>
+            <param name="pointcutAttributeType">Type of the pointcut attribute.</param>
+            <param name="pointcutAttribute">The pointcut attribute.</param>
+            <returns></returns>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Pointcut.PointcutSelector">
+            <summary>
+            Represents a full pointcut selector, with any number of <see cref="T:ArxOne.MrAdvice.Pointcut.PointcutSelectorRule"/>
+            </summary>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Pointcut.PointcutSelector.IncludeRules">
+            <summary>
+            Gets the include rules.
+            If empty, then everything matches
+            </summary>
+            <value>
+            The include rules.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Pointcut.PointcutSelector.ExcludeRules">
+            <summary>
+            Gets the exclude rules.
+            </summary>
+            <value>
+            The exclude rules.
+            </value>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Pointcut.PointcutSelector.Select(System.String,System.Nullable{ArxOne.MrAdvice.Annotation.MemberAttributes})">
+            <summary>
+            Indicates whether the specified [name, attribute] pair has to be selected for advice
+            </summary>
+            <param name="reflectionName">Name of the reflection.</param>
+            <param name="memberAttributes">The attributes.</param>
+            <returns></returns>
+        </member>
+        <member name="F:ArxOne.MrAdvice.Pointcut.PointcutSelector.EmptySelector">
+            <summary>
+            The empty selector
+            </summary>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Pointcut.PointcutSelector.op_Addition(ArxOne.MrAdvice.Pointcut.PointcutSelector,ArxOne.MrAdvice.Pointcut.PointcutSelector)">
+            <summary>
+            Implements the operator +.
+            </summary>
+            <param name="a">a.</param>
+            <param name="b">The b.</param>
+            <returns>
+            The result of the operator.
+            </returns>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Pointcut.PointcutSelectorRule">
+            <summary>
+            Represents a simple rule of pointcut
+            It contains: 
+            - one or more name matching rules
+            - an attribute matching rule
+            </summary>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Pointcut.PointcutSelectorRule.Names">
+            <summary>
+            Gets the names.
+            </summary>
+            <value>
+            The names.
+            </value>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Pointcut.PointcutSelectorRule.Attributes">
+            <summary>
+            Gets or sets the attributes to match.
+            </summary>
+            <value>
+            The attributes.
+            </value>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Pointcut.PointcutSelectorRule.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ArxOne.MrAdvice.Pointcut.PointcutSelectorRule"/> class.
+            </summary>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Pointcut.PointcutSelectorRule.#ctor(System.String[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:ArxOne.MrAdvice.Pointcut.PointcutSelectorRule"/> class.
+            </summary>
+            <param name="names">The names.</param>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Pointcut.PointcutSelectorRule.WildcardMatch(System.String,System.String,System.Boolean)">
+            <summary>
+            Tells if the given string matches the given wildcard.
+            Two wildcards are allowed: '*' and '?'
+            '*' matches 0 or more characters
+            '?' matches any character
+            </summary>
+            <param name="wildcard">The wildcard.</param>
+            <param name="s">The s.</param>
+            <param name="ignoreCase">if set to <c>true</c> [ignore case].</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Pointcut.PointcutSelectorRule.WildcardMatch(System.String,System.String,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Internal matching algorithm.
+            </summary>
+            <param name="wildcard">The wildcard.</param>
+            <param name="s">The s.</param>
+            <param name="wildcardIndex">Index of the wildcard.</param>
+            <param name="sIndex">Index of the s.</param>
+            <param name="ignoreCase">if set to <c>true</c> [ignore case].</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Pointcut.PointcutSelectorRule.Match(System.String,System.String)">
+            <summary>
+            Indicates whether the specified value matches the given rule.
+            </summary>
+            <param name="rule">The rule.</param>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Pointcut.PointcutSelectorRule.MatchName(System.String,System.String)">
+            <summary>
+            Matches the name given the rule.
+            </summary>
+            <param name="rule">The rule.</param>
+            <param name="reflectionName">Name of the reflection.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Pointcut.PointcutSelectorRule.Select(System.String)">
+            <summary>
+            Indicates whether the name must be selected for advice.
+            </summary>
+            <param name="reflectionName">Name of the reflection.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Pointcut.PointcutSelectorRule.Select(System.Nullable{ArxOne.MrAdvice.Annotation.MemberAttributes})">
+            <summary>
+            Indicates whether the attributes must be selected for advice.
+            </summary>
+            <param name="memberAttributes">The member attributes.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Pointcut.PointcutSelectorRule.Select(System.String,System.Nullable{ArxOne.MrAdvice.Annotation.MemberAttributes})">
+            <summary>
+            Indicates if the pair [name, attribute] have to be selected for advice
+            </summary>
+            <param name="reflectionName">Name of the reflection.</param>
+            <param name="memberAttributes">The member attributes.</param>
+            <returns></returns>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Threading.TaskAccessor">
+            <summary>
+            Allows to continue tasks, using reflection instead of generics
+            (fuck the generics when they are the terminal point)
+            </summary>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Threading.TaskAccessor.Create(System.Threading.Tasks.Task)">
+            <summary>
+            Creates a <see cref="T:ArxOne.MrAdvice.Threading.TaskAccessor" /> for given result type.
+            </summary>
+            <param name="task">The task.</param>
+            <returns></returns>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Threading.TaskAccessor.Result">
+            <summary>
+            Gets the result.
+            </summary>
+            <value>
+            The result.
+            </value>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Threading.TaskAccessor`1">
+            <summary>
+            <see cref="T:ArxOne.MrAdvice.Threading.TaskContinuer"/> implementation and specialization
+            </summary>
+            <typeparam name="TResult">The type of the result.</typeparam>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Threading.TaskAccessor`1.Result">
+            <summary>
+            Gets the result.
+            </summary>
+            <value>
+            The result.
+            </value>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Threading.TaskAccessor`1.#ctor(System.Threading.Tasks.Task{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:ArxOne.MrAdvice.Threading.TaskAccessor`1"/> class.
+            </summary>
+            <param name="task">The task.</param>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Threading.TaskCompletionSource">
+            <summary>
+            Task completion source
+            </summary>
+        </member>
+        <member name="P:ArxOne.MrAdvice.Threading.TaskCompletionSource.Task">
+            <summary>
+            Gets the task.
+            </summary>
+            <value>
+            The task.
+            </value>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Threading.TaskCompletionSource.SetResult(System.Object)">
+            <summary>
+                Sets the result.
+            </summary>
+            <param name="result">The result.</param>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Threading.TaskCompletionSource.SetException(System.Exception)">
+            <summary>
+                Sets the exception.
+            </summary>
+            <param name="e">The e.</param>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Threading.TaskCompletionSource.SetCanceled">
+            <summary>
+            Sets to canceled state.
+            </summary>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Threading.TaskCompletionSource.Create(System.Type)">
+            <summary>
+            Creates a TaskCompletionSource for the given.
+            </summary>
+            <param name="taskType">Type of the task
+            (may be void or null, in which case the result parameter to SetResult() is ignored).</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Threading.TaskCompletionSource.ContinueWith(System.Action{System.Threading.Tasks.Task})">
+            <summary>
+            Performs an action after current task is complete.
+            Action is run asynchronously
+            </summary>
+            <param name="action">The action.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Threading.TaskCompletionSourceImplementation`1.SetResult(System.Object)">
+            <summary>
+                Sets the result.
+            </summary>
+            <param name="result">The result.</param>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Threading.TaskCompletionSourceImplementation`1.SetException(System.Exception)">
+            <summary>
+                Sets the exception.
+            </summary>
+            <param name="e">The e.</param>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Threading.TaskCompletionSourceImplementation`1.SetCanceled">
+            <summary>
+            Sets to canceled state.
+            </summary>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Threading.TaskCompletionSourceImplementation`1.#ctor">
+            <summary>
+                Initializes a new instance of the <see cref="T:ArxOne.MrAdvice.Threading.TaskCompletionSource" /> class.
+            </summary>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Threading.TaskCompletionSourceImplementation`1.ContinueWith(System.Action{System.Threading.Tasks.Task})">
+            <summary>
+            Performs an action after current task is complete.
+            Action is run asynchronously
+            </summary>
+            <param name="action">The action.</param>
+            <returns></returns>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Threading.TaskContinuer">
+            <summary>
+            Allows to continue tasks, using reflection instead of generics
+            (fuck the generics when they are the terminal point)
+            </summary>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Threading.TaskContinuer.ContinueWith``1(``0,System.Func{``0,System.Object})">
+            <summary>
+            Continues the specified task.
+            </summary>
+            <typeparam name="TTask">The type of the task.</typeparam>
+            <param name="task">The task.</param>
+            <param name="func">The function.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Threading.TaskContinuer.ContinueWith(System.Threading.Tasks.Task,System.Threading.Tasks.Task)">
+            <summary>
+            Continues the specified two tasks and returns result of last task.
+            </summary>
+            <param name="waitTask">The wait task.</param>
+            <param name="resultTask">The result task.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Threading.TaskContinuer.Create(System.Type)">
+            <summary>
+            Creates a <see cref="T:ArxOne.MrAdvice.Threading.TaskContinuer"/> for given result type.
+            </summary>
+            <param name="resultType">Type of the task.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Threading.TaskContinuer.ContinueWith``1(``0,System.Func{``0,System.Object},System.Type)">
+            <summary>
+            Continues the task
+            </summary>
+            <typeparam name="TTask">The type of the task.</typeparam>
+            <param name="task">The task.</param>
+            <param name="func">The function.</param>
+            <param name="resultType">Type of the result.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Threading.TaskContinuer.ContinueWith(System.Threading.Tasks.Task,System.Threading.Tasks.Task,System.Type)">
+            <summary>
+            Continues the specified two tasks and returns result of last task.
+            </summary>
+            <param name="waitTask">The wait task.</param>
+            <param name="resultTask">The result task.</param>
+            <param name="resultType">Type of the result.</param>
+            <returns></returns>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Threading.TaskContinuer`1">
+            <summary>
+            <see cref="T:ArxOne.MrAdvice.Threading.TaskContinuer"/> implementation and specialization
+            </summary>
+            <typeparam name="TResult">The type of the result.</typeparam>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Threading.TaskContinuer`1.ContinueWith``1(``0,System.Func{``0,System.Object})">
+            <summary>
+            Continues the specified task.
+            </summary>
+            <typeparam name="TTask">The type of the task.</typeparam>
+            <param name="task">The task.</param>
+            <param name="func">The function.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Threading.TaskContinuer`1.ContinueWith(System.Threading.Tasks.Task,System.Threading.Tasks.Task)">
+            <summary>
+            Continues the specified two tasks and returns result of last task.
+            </summary>
+            <param name="waitTask">The wait task.</param>
+            <param name="resultTask">The result task.</param>
+            <returns></returns>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Threading.TaskExtensions">
+            <summary>
+            Extensions to Tasks
+            </summary>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Threading.TaskExtensions.GetTaskType(System.Threading.Tasks.Task)">
+            <summary>
+            Gets the type of the task.
+            </summary>
+            <param name="task">The task.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Threading.TaskExtensions.GetTaskType(System.Type)">
+            <summary>
+            Gets the type of the task.
+            </summary>
+            <param name="type">The type.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Threading.TaskExtensions.GetResult(System.Threading.Tasks.Task)">
+            <summary>
+            Gets the result, as an object.
+            </summary>
+            <param name="task">The task.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Threading.TaskExtensions.ContinueWith``1(``0,System.Func{``0,System.Object},System.Type)">
+            <summary>
+            Continues the task, in a reflection way (opposed to generic way).
+            </summary>
+            <typeparam name="TTask">The type of the task.</typeparam>
+            <param name="task">The task.</param>
+            <param name="func">The function.</param>
+            <param name="resultType">Type of the result.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Threading.TaskExtensions.ContinueWith(System.Threading.Tasks.Task,System.Threading.Tasks.Task,System.Type)">
+            <summary>
+            Continues the with.
+            </summary>
+            <param name="waitTask">The wait task.</param>
+            <param name="resultTask">The result task.</param>
+            <param name="resultType">Type of the result.</param>
+            <returns></returns>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Threading.Tasks">
+            <summary>
+            Tasks helper library
+            </summary>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Threading.Tasks.Void">
+            <summary>
+            Gets a default empty task.
+            </summary>
+            <returns>
+                The ok.
+            </returns>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Utility.ExceptionExtensions">
+            <summary>
+            Extensions to exception
+            </summary>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Utility.ExceptionExtensions.PreserveStackTrace(System.Exception)">
+            <summary>
+            Preserves the stack trace.
+            I know there is a better solution in .NET 4.5, but this is PCL here
+            </summary>
+            <param name="exception">The exception.</param>
+            <returns></returns>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Utility.MemberInfoExtensions">
+            <summary>
+            Extensions to abstract <see cref="T:System.Reflection.MemberInfo"/>
+            </summary>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Utility.MemberInfoExtensions.GetMemberType(System.Reflection.MemberInfo)">
+            <summary>
+            Gets the type of the member.
+            </summary>
+            <param name="memberInfo">The member information.</param>
+            <returns></returns>
+            <exception cref="T:System.NotSupportedException"></exception>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Utility.MemberInfoExtensions.GetValue(System.Reflection.MemberInfo,System.Object)">
+            <summary>
+            Gets the value from target using memberInfo.
+            </summary>
+            <param name="memberInfo">The member information.</param>
+            <param name="target">The target.</param>
+            <returns></returns>
+            <exception cref="T:System.NotSupportedException"></exception>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Utility.MemberInfoExtensions.SetValue(System.Reflection.MemberInfo,System.Object,System.Object)">
+            <summary>
+            Sets the value to target using memberInfo.
+            </summary>
+            <param name="memberInfo">The member information.</param>
+            <param name="target">The target.</param>
+            <param name="value">The value.</param>
+            <exception cref="T:System.NotSupportedException"></exception>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Utility.MemberInfoExtensions.IsStatic(System.Reflection.MemberInfo)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Reflection.MemberInfo"/> is static.
+            </summary>
+            <param name="memberInfo">The member information.</param>
+            <returns></returns>
+            <exception cref="T:System.NotSupportedException"></exception>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Utility.MethodInfoExtensions">
+            <summary>
+            Extensions for <see cref="T:System.Reflection.MethodBase"/>
+            </summary>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Utility.MethodInfoExtensions.GetMemberAttributes(System.Reflection.MethodBase)">
+            <summary>
+            Gets the member attributes for the method.
+            </summary>
+            <param name="methodBase">The method base.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Utility.MethodInfoExtensions.ToMemberAttributes(System.Reflection.MethodAttributes)">
+            <summary>
+            Converts <see cref="T:System.Reflection.MethodAttributes"/> to <see cref="T:ArxOne.MrAdvice.Annotation.MemberAttributes"/>.
+            </summary>
+            <param name="methodAttributes">The method attributes.</param>
+            <returns></returns>
+        </member>
+        <member name="T:ArxOne.MrAdvice.Utility.TypeExtensions">
+            <summary>
+            Extensions to type
+            </summary>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Utility.TypeExtensions.GetSelfAndParents(System.Type)">
+            <summary>
+            Enumerates from type to topmost parent
+            </summary>
+            <param name="type">The type.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Utility.TypeExtensions.GetSelfAndEnclosing(System.Type)">
+            <summary>
+            Gets the self and enclosing types.
+            </summary>
+            <param name="type">The type.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Utility.TypeExtensions.GetFieldsAndProperties(System.Type,System.Reflection.BindingFlags)">
+            <summary>
+            Gets the fields and properties.
+            </summary>
+            <param name="type">The type.</param>
+            <param name="bindingFlags">The binding flags.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Utility.TypeExtensions.GetMemberAttributes(System.Type)">
+            <summary>
+            Gets the member attributes for the given type.
+            </summary>
+            <param name="type">The type.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ArxOne.MrAdvice.Utility.TypeExtensions.ToMemberAttributes(System.Reflection.TypeAttributes)">
+            <summary>
+            Converts the type attributes to member attributes.
+            </summary>
+            <param name="typeAttributes">The type attributes.</param>
+            <returns></returns>
+        </member>
+        <member name="T:MrAdvice.Advice.ProceedDelegate">
+            <summary>
+            This delegate is used internally to speedup advices
+            Invoking a delegate is much faster than invoking a <see cref="T:System.Reflection.MethodInfo"/>
+            </summary>
+            <param name="instance">The instance.</param>
+            <param name="parameters">The parameters.</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

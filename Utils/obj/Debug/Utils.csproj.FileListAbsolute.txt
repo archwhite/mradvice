@@ -1,0 +1,10 @@
+A:\WebApplication1\Utils\bin\Debug\Utils.dll
+A:\WebApplication1\Utils\bin\Debug\Utils.pdb
+A:\WebApplication1\Utils\bin\Debug\Newtonsoft.Json.dll
+A:\WebApplication1\Utils\bin\Debug\Newtonsoft.Json.xml
+A:\WebApplication1\Utils\obj\Debug\Utils.csproj.CoreCompileInputs.cache
+A:\WebApplication1\Utils\obj\Debug\Utils.dll
+A:\WebApplication1\Utils\obj\Debug\Utils.pdb
+A:\WebApplication1\Utils\bin\Debug\Utils.dll.CodeAnalysisLog.xml
+A:\WebApplication1\Utils\bin\Debug\Utils.dll.lastcodeanalysissucceeded
+A:\WebApplication1\Utils\obj\Debug\Utils.csprojResolveAssemblyReference.cache
